@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>demo-spring-boot-web-reactive-sse</title>
+    <title>demo-spring-sse</title>
 </head>
 <body>
 <div>
@@ -11,7 +11,7 @@
 <script type="application/javascript">
 
     if (!!window.EventSource) {
-        var eventSource = new EventSource("/sse/messages");
+        var eventSource = new EventSource("/sse/infinite");
 
         var elements = document.getElementById("messages");
 
@@ -42,7 +42,7 @@
             }
         };
     } else {
-        alert('The browser does not support Server-sent events');
+        alert('The browser does not support Server-Sent Events');
     }
 
 </script>
