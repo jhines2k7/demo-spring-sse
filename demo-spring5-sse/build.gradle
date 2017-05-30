@@ -1,46 +1,36 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.BUILD-20161118.124456-136'
+        springBootVersion = '2.0.0.M1'
     }
     repositories {
         mavenCentral()
-        maven { url 'https://repo.spring.io/snapshot' }
-        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.0.BUILD-20161118.124456-137')
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 jar {
-    baseName = 'demo-spring5-sse'
-    version = '0.0.1-SNAPSHOT'
+    baseName = 'dem-spring5-sse'
+    version = '0.0.2-SNAPSHOT'
 }
+
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url 'https://repo.spring.io/snapshot' }
-    maven { url 'https://repo.spring.io/milestone' }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
-ext['reactor.version'] = '3.0.2.RELEASE'
-ext['spring.version'] = '5.0.0.BUILD-20161117.095337-408'
 
 dependencies {
-    compile('org.springframework.boot.experimental:spring-boot-starter-web-reactive:0.1.0.BUILD-20161119.000018-127') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-        exclude group: 'org.springframework', module: 'spring-core'
-    }
-    
-    compile('org.springframework:spring-core:5.0.0.BUILD-20161117.095337-409')
-
-    compile('io.reactivex:rxjava-reactive-streams:1.2.1')
-
-    compile('io.reactivex:rxnetty-common:0.5.2-rc.4')
-    compile('io.reactivex:rxnetty-http:0.5.2-rc.4')
-
+    compile('org.springframework.boot:spring-boot-starter-webflux')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.projectreactor.addons:reactor-test')
 }

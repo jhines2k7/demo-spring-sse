@@ -15,7 +15,6 @@ public class ScheduledService {
 
     public ScheduledService() {
         emitter = EmitterProcessor.create();
-        emitter.connect();
     }
 
     public Flux<ServerSentEvent<Message>> getMessages() {

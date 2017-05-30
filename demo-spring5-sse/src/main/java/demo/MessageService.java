@@ -15,7 +15,6 @@ public class MessageService {
 
     public MessageService() {
         emitter = EmitterProcessor.<Message>create();
-        emitter.connect();
     }
 
     public Flux<Message> getMessages() {
