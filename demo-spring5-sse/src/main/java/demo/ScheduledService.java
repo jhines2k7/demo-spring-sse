@@ -1,6 +1,9 @@
 package demo;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.EmitterProcessor;
@@ -25,9 +28,9 @@ public class ScheduledService {
     void timerHandler() {
         try {
             emitter.onNext(
-                    ServerSentEvent.builder(
-                            new Message(new Date().toString())
-                    ).build()
+                ServerSentEvent.builder(
+                    new Message(new Date().toString())
+                ).build()
             );
         } catch (Exception e) {
             emitter.onError(e);

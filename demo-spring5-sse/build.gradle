@@ -8,12 +8,19 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-stream-dependencies:Chelsea.SR2'
+    }
+}
 
 jar {
     baseName = 'dem-spring5-sse'
@@ -30,7 +37,12 @@ repositories {
 
 
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-integration")
+    compile("org.springframework.integration:spring-integration-feed")
+    compile("org.springframework.integration:spring-integration-file")
     compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile 'org.springframework.cloud:spring-cloud-stream'
+    compile 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor.addons:reactor-test')
 }
