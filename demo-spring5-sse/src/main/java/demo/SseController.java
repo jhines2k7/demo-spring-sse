@@ -47,7 +47,7 @@ public class SseController {
                 s -> {
                     MessageHandler handler = msg -> s.next(String.class.cast(msg.getPayload()));
                     filesChannel().subscribe(handler);
-                    //s.complete();
+                    s.complete();
                 });
     }
 
